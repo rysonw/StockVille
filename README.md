@@ -5,13 +5,13 @@ A gamified version of the stock market.
 Hosted @ NOT YET IMPLEMENTED
 
 ### Stack:
-React
-ASP.NET API
-Firebase
-React-Redux
-React-Router
-Firebase SDK 3 with OAuth authentication
-Azure Cosmos
+-React
+-ASP.NET API
+-Firebase
+-React-Redux
+-React-Router
+-Firebase SDK 3 with OAuth authentication
+-Azure Cosmos
 
 ### Install firebase-tools:
 $ npm install -g firebase-tools
