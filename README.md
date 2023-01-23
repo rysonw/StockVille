@@ -2,7 +2,7 @@
 
 A gamified version of the stock market. 
 
-Hosted @ NOT YET IMPLEMENTED
+Hosting AT NOT YET IMPLEMENTED
 
 ### Stack:
 - React
@@ -14,8 +14,7 @@ Hosted @ NOT YET IMPLEMENTED
 - Azure Cosmos
 
 
-```
-
+#### Configure this app with your project-specific details:
 ```javascript
 // .firebaserc
 
