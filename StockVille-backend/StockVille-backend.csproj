@@ -1,0 +1,141 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>StockVille_backend</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.Bson.1.0.3-beta1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="StockVille.API\appsettings.Development.json" />
+    <None Include="StockVille.API\appsettings.json" />
+    <None Include="StockVille.API\Dockerfile" />
+    <None Include="StockVille.API\obj\Container\ContainerDevelopmentMode.cache" />
+    <None Include="StockVille.API\obj\Container\ContainerId.cache" />
+    <None Include="StockVille.API\obj\Container\ContainerName.cache" />
+    <None Include="StockVille.API\obj\Container\ContainerRunContext.cache" />
+    <None Include="StockVille.API\obj\Debug\net6.0\project.razor.json" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.AssemblyInfoInputs.cache" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.assets.cache" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.csproj.AssemblyReference.cache" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.csproj.CoreCompileInputs.cache" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="StockVille.API\obj\project.assets.json" />
+    <None Include="StockVille.API\obj\project.nuget.cache" />
+    <None Include="StockVille.API\obj\Release\net6.0\StockVille-backend.AssemblyInfoInputs.cache" />
+    <None Include="StockVille.API\obj\Release\net6.0\StockVille-backend.assets.cache" />
+    <None Include="StockVille.API\obj\Release\net6.0\StockVille-backend.csproj.AssemblyReference.cache" />
+    <None Include="StockVille.API\obj\Release\net6.0\StockVille-backend.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="StockVille.API\obj\StockVille-backend.csproj.nuget.dgspec.json" />
+    <None Include="StockVille.API\obj\StockVille-backend.csproj.nuget.g.props" />
+    <None Include="StockVille.API\obj\StockVille-backend.csproj.nuget.g.targets" />
+    <None Include="StockVille.API\Properties\launchSettings.json" />
+    <None Include="StockVille.API\StockVille-backend.csproj" />
+    <None Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.AssemblyInfoInputs.cache" />
+    <None Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.assets.cache" />
+    <None Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.csproj.AssemblyReference.cache" />
+    <None Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="StockVille.DataAccess\obj\project.assets.json" />
+    <None Include="StockVille.DataAccess\obj\project.nuget.cache" />
+    <None Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.AssemblyInfoInputs.cache" />
+    <None Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.assets.cache" />
+    <None Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.csproj.AssemblyReference.cache" />
+    <None Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="StockVille.DataAccess\obj\StockVille.DataAccess.csproj.nuget.dgspec.json" />
+    <None Include="StockVille.DataAccess\obj\StockVille.DataAccess.csproj.nuget.g.props" />
+    <None Include="StockVille.DataAccess\obj\StockVille.DataAccess.csproj.nuget.g.targets" />
+    <None Include="StockVille.DataAccess\StockVille.DataAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StockVille.API\Controllers\StockController.cs" />
+    <Compile Include="StockVille.API\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.AssemblyInfo.cs" />
+    <Compile Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.GlobalUsings.g.cs" />
+    <Compile Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.MvcApplicationPartsAssemblyInfo.cs" />
+    <Compile Include="StockVille.API\obj\Release\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="StockVille.API\obj\Release\net6.0\StockVille-backend.AssemblyInfo.cs" />
+    <Compile Include="StockVille.API\obj\Release\net6.0\StockVille-backend.GlobalUsings.g.cs" />
+    <Compile Include="StockVille.API\Services\APIClients\StockAPICall.cs" />
+    <Compile Include="StockVille.API\Startup.cs" />
+    <Compile Include="StockVille.DataAccess\Class1.cs" />
+    <Compile Include="StockVille.DataAccess\Models\Entity.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.AssemblyInfo.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Debug\net6.0\StockVille.DataAccess.GlobalUsings.g.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Release\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.AssemblyInfo.cs" />
+    <Compile Include="StockVille.DataAccess\obj\Release\net6.0\StockVille.DataAccess.GlobalUsings.g.cs" />
+    <Compile Include="StockVille.DataAccess\Repos\DbRepo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StockVille.API\obj\Debug\net6.0\StockVille-backend.csproj.FileListAbsolute.txt" />
+    <Content Include="StockVille.API\StockVille-backend.csproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vs\StockVille-backend\v17\" />
+    <Folder Include="StockVille.API\bin\Debug\net6.0\" />
+    <Folder Include="StockVille.API\bin\Release\net6.0\" />
+    <Folder Include="StockVille.API\obj\Debug\net6.0\refint\" />
+    <Folder Include="StockVille.API\obj\Debug\net6.0\ref\" />
+    <Folder Include="StockVille.API\obj\Debug\net6.0\staticwebassets\" />
+    <Folder Include="StockVille.API\obj\Release\net6.0\refint\" />
+    <Folder Include="StockVille.API\obj\Release\net6.0\ref\" />
+    <Folder Include="StockVille.API\obj\Release\net6.0\staticwebassets\" />
+    <Folder Include="StockVille.DataAccess\bin\Debug\net6.0\" />
+    <Folder Include="StockVille.DataAccess\bin\Release\net6.0\" />
+    <Folder Include="StockVille.DataAccess\obj\Debug\net6.0\refint\" />
+    <Folder Include="StockVille.DataAccess\obj\Debug\net6.0\ref\" />
+    <Folder Include="StockVille.DataAccess\obj\Release\net6.0\refint\" />
+    <Folder Include="StockVille.DataAccess\obj\Release\net6.0\ref\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
