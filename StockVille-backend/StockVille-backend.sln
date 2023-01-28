@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockVille-backend", "StockVille-backend.csproj", "{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockVille-backend", "StockVille-backend.csproj", "{005BD701-BD78-4C06-8CF9-3E8E0AC292A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C3E160D-C4F9-4CC1-9E20-5B9EC47B4A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{005BD701-BD78-4C06-8CF9-3E8E0AC292A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{005BD701-BD78-4C06-8CF9-3E8E0AC292A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{005BD701-BD78-4C06-8CF9-3E8E0AC292A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{005BD701-BD78-4C06-8CF9-3E8E0AC292A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F24049B9-3C89-43E5-9839-39422904A93F}
+		SolutionGuid = {E0A618B1-0C31-487C-8CEF-03043229F8A1}
 	EndGlobalSection
 EndGlobal
