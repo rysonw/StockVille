@@ -17,6 +17,10 @@ import Breakdown from "scenes/breakdown";
 import Admin from "scenes/admin";
 import Performance from "scenes/performance";
 import Form from "scenes/form";
+import LoginForm from "scenes/login/Login.jsx";
+import SignUpForm from "scenes/login/Signup";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -27,6 +31,8 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignUpForm />} />
             <Route element={<Layout />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/homepage" element={<Navigate to="/dashboard" replace />} />

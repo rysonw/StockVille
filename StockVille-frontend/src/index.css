@@ -27,3 +27,22 @@ body,
 ::-webkit-scrollbar-track:hover {
   background: #21295c;
 }
+
+/* Page Transitions */
+.slide-enter {
+  transform: translateX(-100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0%);
+  transition: transform 300ms ease-in;
+}
+
+.slide-exit {
+  transform: translateX(0%);
+}
+
+.slide-exit-active {
+  transform: translateX(100%);
+  transition: transform 300ms ease-in;
+}
