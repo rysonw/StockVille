@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 //Primarily used for adding/updating data in database from API
 
-namespace StockVille.Controllers
+namespace StockVille_backend.Controllers
 {
     public class StockController
     {

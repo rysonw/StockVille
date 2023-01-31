@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider, Form } from '@mui/material/styles';
 import { useState } from 'react';
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -58,11 +59,21 @@ export default function SignUpForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const registrationData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      phoneNumber: phoneNumber
+    };
+
+    axios.post('http://localhost:3000/api/register', registrationData)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -94,6 +105,7 @@ export default function SignUpForm() {
                     fullWidth
                     id="firstName"
                     label="First Name"
+                    onChange={e => setFirstName(e.target.value)}
                     autoFocus
                     />
                 </Grid>
@@ -105,6 +117,7 @@ export default function SignUpForm() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
+                    onChange={e => setLastName(e.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -115,6 +128,7 @@ export default function SignUpForm() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={e => setEmail(e.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -151,6 +165,7 @@ export default function SignUpForm() {
                     label="Phone Number"
                     type="phoneNumber"
                     id="phoneNumber"
+                    OnChange = {e => setPhoneNumber(e.target.value)}
                     />
                 </Grid>
                 </Grid>
@@ -159,6 +174,7 @@ export default function SignUpForm() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2,  }}
+                onClick={handleSubmit}
                 >
                 Sign Up
                 </Button>
