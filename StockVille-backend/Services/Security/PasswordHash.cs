@@ -27,5 +27,10 @@ namespace StockVille_backend.Services.Security
             Array.Copy(hash, 0, hashBytes, 16, 20);
             return Convert.ToBase64String(hashBytes);
         }
+
+        public static string UnhashPassword(string password)
+        {
+            return "";
+        }
     }
 }

@@ -1,64 +1,152 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using StockVille_backend.Models;
 using StockVille_backend.Services.Security;
+using System.Data;
+using System.Data.SqlClient;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/login_data")]
 public class LoginController : ControllerBase
 {
+
+    private readonly IConfiguration _configuration;
+
+    public LoginController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     [HttpGet]
-    public IActionResult GetData()
+    public Dictionary<string, object> GetDataThroughLogin(/*string user, string hashedPassword*/) //Puling from SQL Database; IActionResult is used for HTTP return codes
     {
-        var data = "example data";
-        return Ok(data);
-    }
 
-    [HttpPost]
-    public IActionResult PostData([FromBody] object payload)
-    {
-        // handle the posted data
-        return Ok();
-    }
+        string query;
+        string user = "johndoe";
+        string hashedPassword = "hashedpassword";
+        //string hashedPassword = PasswordHashing.HashPassword("password");
 
-    [HttpPost]
-    public async Task<ActionResult<string>> Login([FromBody] LoginRequest request)
-    {
-        // Hash the password using the password hashing function
-        string hashedPassword = PasswordHashing.HashPassword((string)request.Password);
+        if (user.Contains('@'))
+        {
+            query = $"SELECT * FROM Users WHERE Email = '{user}' AND Password = '{hashedPassword}';";
+        }
+        else {
+            query = $"SELECT * FROM Users WHERE Username = '{user}' AND Password = '{hashedPassword}';";
+        }
 
-        // Store the hashed password in a database or use it for authentication purposes
-        await Database.StoreHashedPasswordAsync(hashedPassword);
+        Dictionary<string, object> currUserData = new Dictionary<string, object>();
+        string connectionString = _configuration.GetConnectionString("PrimaryDatabase");
 
-        return Ok();
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error connecting to DB");
+            }
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                //command.Parameters.AddWithValue("@user", user); //Used to mask the actual data being passed through
+                //command.Parameters.AddWithValue("@password", hashedPassword);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            if (reader.GetName(i) == "Password" || reader.GetName(i) == "Username") { continue; }
+                            else { currUserData.Add(reader.GetName(i), reader.GetValue(i)); }
+                        }
+                        reader.Close();
+                        connection.Close();
+                        return currUserData;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        connection.Close();
+                        return null;
+                    }
+                }
+            }
+        }
     }
 }
 
-[Route("api/[controller]")]
+
 [ApiController]
+[Route("api/register_data")]
 public class RegistrationController : ControllerBase
 {
-    private readonly MyDBContext _context;
+    private readonly IConfiguration _configuration;
 
-    public RegistrationController(MyDBContext context)
+    public RegistrationController(IConfiguration configuration)
     {
-        _context = context;
+        _configuration = configuration;
     }
 
     [HttpPost]
-    public IActionResult Register(User user)
+    public IActionResult CreateUserThorughRegister(/*string firstName, string lastName, string email, string phoneNumber, string address, int buyingPower, int profit, string username, string password*/) //Puling from SQL Database; IACtionResult is used for HTTP return codes
     {
-        _context.Users.Add(user); //Add to database
-        _context.SaveChanges();
+        //mock data
+        string firstName = "Barack Obama";
+        string lastName = "Doe";
+        string email = "rock.ob@example.com";
+        string phoneNumber = "555-555-5555";
+        string address = "123 Main St";
+        decimal buyingPower = 10.00M;
+        decimal profit = 10.00M;
+        string username = "b_obama";
+        string password = "password";
 
-        return Ok(); //Returns 200, can also add data inside as an arg to return
+
+
+        string hashedPassword = PasswordHashing.HashPassword(password);
+        string query = $"INSERT INTO Users (FirstName, LastName, Email, PhoneNumber, Address, BuyingPower, ProfitForDay, Username, Password) VALUES ('{firstName}', '{lastName}', '{email}', '{phoneNumber}', '{address}', {buyingPower}, {profit}, '{username}', '{hashedPassword}');";
+        string connectionString = _configuration.GetConnectionString("PrimaryDatabase");
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error connecting to DB");
+            }
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Close();
+                    connection.Close();
+                    return Ok();
+                }
+
+                catch
+                {
+                    connection.Close();
+                    return Problem();
+                }
+
+
+            }
+        }
     }
 }
 
 
-public class LoginRequest
-{
-    public string Password { get; set; }
-}
+
 
 
 

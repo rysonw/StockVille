@@ -12,9 +12,9 @@ const Form = () => {
   };
 
   return (
-    <Box m="20px">
-      <Header title="USER PROFILE" subtitle="Update Your Credentials" />
-
+    <Box m="30px">
+      <Header title="USER PROFILE" subtitle="Update Your Credentials"/>
+      
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
