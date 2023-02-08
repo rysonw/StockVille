@@ -3,15 +3,12 @@ import { Box } from "@mui/material";
 import Header from "components/Header";
 import BreakdownChart from "components/BreakdownChart";
 
-const Breakdown = () => {
+const Shop = () => {
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="CHARTS" subtitle="CHARTS AND STUFF" />
-      <Box mt="40px" height="75vh">
-        <BreakdownChart />
-      </Box>
+      <Header title="SHOP" subtitle="Spend Currency Here" />
     </Box>
   );
 };
 
-export default Breakdown;
+export default Shop;

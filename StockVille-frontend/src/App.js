@@ -9,13 +9,9 @@ import Dashboard from "scenes/dashboard";
 import Products from "scenes/products";
 import Customers from "scenes/customers";
 import Transactions from "scenes/transactions";
-import Geography from "scenes/geography";
-import Overview from "scenes/overview";
-import Daily from "scenes/daily";
+import Shop from "scenes/shop";
 import Monthly from "scenes/monthly";
 import Breakdown from "scenes/breakdown";
-import Admin from "scenes/admin";
-import Performance from "scenes/performance";
 import Form from "scenes/form";
 import LoginForm from "scenes/login/Login.jsx";
 import SignUpForm from "scenes/login/Signup";
@@ -33,21 +29,19 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignUpForm />} />
+            <Route path="/" element={<LoginForm />} />
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/homepage" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/customers" element={<Customers />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/geography" element={<Geography />} />
-              <Route path="/overview" element={<Overview />} />
-              <Route path="/daily" element={<Daily />} />
-              <Route path="/monthly" element={<Monthly />} />
-              <Route path="/breakdown" element={<Breakdown />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/performance" element={<Performance />} />
+              <Route path="/stocks" element={<Products />} />
+              <Route path="/leaderboard" element={<Customers />} />
               <Route path="/profile" element={<Form />} />
+              <Route path="/calendar" element={<Monthly />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/breakdown" element={<Breakdown />} />
+              {/* To Add */}
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/about" element={<Breakdown />} />
             </Route>
           </Routes>
         </ThemeProvider>

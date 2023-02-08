@@ -1,13 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Newtonsoft.Json;
 using StockVille_backend.Models;
 using StockVille_backend.Services.Security;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.Json;
+
+public class LoginRequest
+{
+    public string User { get; set; }
+    public string Password { get; set; }
+}
 
 [ApiController]
-[Route("/api/login_data")]
+[Route("~/api/login_data")]
+//[Produces("application/json")] /*Swagger UI Testing purposes*/
+//[ProducesResponseType(typeof(Dictionary<string, object>), 200)]
 public class LoginController : ControllerBase
 {
 
@@ -18,21 +28,21 @@ public class LoginController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet]
-    public Dictionary<string, object> GetDataThroughLogin(/*string user, string hashedPassword*/) //Puling from SQL Database; IActionResult is used for HTTP return codes
+    [HttpPost]
+    public IActionResult TryLogin([FromBody] LoginRequest request) //Puling from SQL Database; IActionResult is used for HTTP return codes
     {
-
+        var user = request.User;
+        var password = request.Password;
         string query;
-        string user = "johndoe";
-        string hashedPassword = "hashedpassword";
-        //string hashedPassword = PasswordHashing.HashPassword("password");
+        string hashedPassword = PasswordHashing.HashPassword(password);
 
         if (user.Contains('@'))
         {
-            query = $"SELECT * FROM Users WHERE Email = '{user}' AND Password = '{hashedPassword}';";
+            query = $"SELECT * FROM Users WHERE Email = '{user}' AND Password = '{password}';";
         }
-        else {
-            query = $"SELECT * FROM Users WHERE Username = '{user}' AND Password = '{hashedPassword}';";
+        else
+        {
+            query = $"SELECT * FROM Users WHERE Username = '{user}' AND Password = '{password}';";
         }
 
         Dictionary<string, object> currUserData = new Dictionary<string, object>();
@@ -65,13 +75,14 @@ public class LoginController : ControllerBase
                         }
                         reader.Close();
                         connection.Close();
-                        return currUserData;
+                        var json = JsonConvert.SerializeObject(currUserData);
+                        return Ok(currUserData);
                     }
                     else
                     {
                         reader.Close();
                         connection.Close();
-                        return null;
+                        return Problem("Bad Request");
                     }
                 }
             }
@@ -79,70 +90,68 @@ public class LoginController : ControllerBase
     }
 }
 
-
-[ApiController]
-[Route("api/register_data")]
-public class RegistrationController : ControllerBase
-{
-    private readonly IConfiguration _configuration;
-
-    public RegistrationController(IConfiguration configuration)
+    [ApiController]
+    [Route("/api/register_data")]
+    public class RegistrationController : ControllerBase
     {
-        _configuration = configuration;
-    }
+        private readonly IConfiguration _configuration;
 
-    [HttpPost]
-    public IActionResult CreateUserThorughRegister(/*string firstName, string lastName, string email, string phoneNumber, string address, int buyingPower, int profit, string username, string password*/) //Puling from SQL Database; IACtionResult is used for HTTP return codes
-    {
-        //mock data
-        string firstName = "Barack Obama";
-        string lastName = "Doe";
-        string email = "rock.ob@example.com";
-        string phoneNumber = "555-555-5555";
-        string address = "123 Main St";
-        decimal buyingPower = 10.00M;
-        decimal profit = 10.00M;
-        string username = "b_obama";
-        string password = "password";
-
-
-
-        string hashedPassword = PasswordHashing.HashPassword(password);
-        string query = $"INSERT INTO Users (FirstName, LastName, Email, PhoneNumber, Address, BuyingPower, ProfitForDay, Username, Password) VALUES ('{firstName}', '{lastName}', '{email}', '{phoneNumber}', '{address}', {buyingPower}, {profit}, '{username}', '{hashedPassword}');";
-        string connectionString = _configuration.GetConnectionString("PrimaryDatabase");
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        public RegistrationController(IConfiguration configuration)
         {
-            try
-            {
-                connection.Open();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error connecting to DB");
-            }
+            _configuration = configuration;
+        }
 
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
+        [HttpPost]
+        public IActionResult CreateUserThorughRegister(string firstName, string lastName, string email, string phoneNumber, string address, int buyingPower, int profit, string username, string password) //Puling from SQL Database; IACtionResult is used for HTTP return codes
+        {
+            //mock data
+            //string firstName = "Barack Obama";
+            //string lastName = "Doe";
+            //string email = "rock.ob@example.com";
+            //string phoneNumber = "555-555-5555";
+            //string address = "123 Main St";
+            //decimal buyingPower = 10.00M;
+            //decimal profit = 10.00M;
+            //string username = "b_obama";
+            //string password = "password";
 
+            string hashedPassword = PasswordHashing.HashPassword(password);
+            string query = $"INSERT INTO Users (FirstName, LastName, Email, PhoneNumber, Address, BuyingPower, ProfitForDay, Username, Password) VALUES ('{firstName}', '{lastName}', '{email}', '{phoneNumber}', '{address}', {buyingPower}, {profit}, '{username}', '{hashedPassword}');";
+            string connectionString = _configuration.GetConnectionString("PrimaryDatabase");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
                 try
                 {
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Close();
-                    connection.Close();
-                    return Ok();
+                    connection.Open();
                 }
-
-                catch
+                catch (Exception ex)
                 {
-                    connection.Close();
-                    return Problem();
+                    Console.WriteLine("Error connecting to DB");
                 }
 
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
 
+                    try
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        reader.Close();
+                        connection.Close();
+                        return Ok(); //200
+                    }
+
+                    catch
+                    {
+                        connection.Close();
+                        return Problem(); //Bad request code
+                    }
+
+
+                }
             }
         }
-    }
+
 }
 
 

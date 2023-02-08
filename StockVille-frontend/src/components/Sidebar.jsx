@@ -21,12 +21,8 @@ import {
   Groups2Outlined,
   ReceiptLongOutlined,
   ShoppingBag,
-  PublicOutlined,
   PointOfSaleOutlined,
   TodayOutlined,
-  CalendarMonthOutlined,
-  AdminPanelSettingsOutlined,
-  TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
@@ -55,10 +51,10 @@ const navItems = [
     text: "Transactions",
     icon: <ReceiptLongOutlined />,
   },
-  {
-    text: "Overview",
-    icon: <PointOfSaleOutlined />,
-  },
+  // {
+  //   text: "Overview",
+  //   icon: <PointOfSaleOutlined />,
+  // },
   {
     text: "Calendar",
     icon: <TodayOutlined />,

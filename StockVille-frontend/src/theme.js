@@ -137,3 +137,6 @@ export const themeSettings = (mode) => {
     },
   };
 };
+ 
+
+//Add more themes for shop items...

@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -39,14 +37,52 @@ const theme = createTheme({
 });
 
 export default function LoginForm() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    // const response = await axios.post('https://localhost:5000/api/login_data', {
+    //   user: user,
+    //   password: password
+    // }, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    // .then(function (response) {
+    //   alert(response)
+    // })
+    // .catch(function (error) {
+    //   alert(error);
+    // });
+
+    fetch('https://localhost:5000/api/login_data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: user,
+        password: password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data)
+      })
+      .catch(error => {
+        alert(error);
+      });
+
   };
+
+
+
+ 
+const [password, setPassword] = useState("");
+const [user, setUser] = useState("");
+  
+const handleChangePassword = event => setPassword(event.target.value);
+const handleChangeUser = event => setUser(event.target.value);
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,14 +104,16 @@ export default function LoginForm() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {/* Run whatever this is aganist both usernam and email column */}
-            <TextField asdlkasjd
+            <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="user"
+              label="Username/Email Address"
+              name="user"
+              autoComplete="user"
+              value={user}
+              onChange={handleChangeUser}
               autoFocus
             />
             <TextField
@@ -86,6 +124,8 @@ export default function LoginForm() {
               label="Password"
               type="password"
               id="password"
+              value={password}
+              onChange={handleChangePassword}
               autoComplete="current-password"
             />
 
@@ -94,6 +134,7 @@ export default function LoginForm() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, currentcolor: "#000000" }}
+              onClick={handleSubmit}
             >
               LOGIN
             </Button>

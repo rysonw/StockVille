@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using StockVille_backend.Models;
 using System.Reflection.Metadata;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Cors;
 
 namespace StockVille_backend
 {
@@ -55,15 +56,7 @@ namespace StockVille_backend
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
-                endpoints.MapPost("/register", async (context) =>
-                {
-                    // Your logic to handle the registration request here
-                    await context.Response.WriteAsync("User registration successful!");
-                });
             });
     
          
