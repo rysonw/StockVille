@@ -7,10 +7,9 @@ Hosting AT NOT YET IMPLEMENTED
 ### Stack:
 - React
 - ASP.NET API
-- Firebase
-- React-Redux
-- React-Router
-- Firebase SDK 3 with OAuth authentication
+- Stock Data API
+- Firebase (TODO)
+- Firebase SDK 3 with OAuth authentication (TODO)
 - Azure Cosmos
 
 
