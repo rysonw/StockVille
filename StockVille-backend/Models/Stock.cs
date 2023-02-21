@@ -8,6 +8,7 @@ using System.Collections;
 namespace StockVille_backend.Models { 
     public class Stock
     {
+        public int stockID { get; set; }
         public int StockSymbol { get; set; }
         public string CompanyName { get; set; }
         public double StockChange { get; set; }

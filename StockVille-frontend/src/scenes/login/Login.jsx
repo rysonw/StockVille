@@ -40,21 +40,6 @@ export default function LoginForm() {
   const handleSubmit = async(event) => {
     event.preventDefault();
 
-    // const response = await axios.post('https://localhost:5000/api/login_data', {
-    //   user: user,
-    //   password: password
-    // }, {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(function (response) {
-    //   alert(response)
-    // })
-    // .catch(function (error) {
-    //   alert(error);
-    // });
-
     fetch('https://localhost:5000/api/login_data', {
       method: 'POST',
       headers: {

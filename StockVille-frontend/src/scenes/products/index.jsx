@@ -3,31 +3,25 @@ import {
   Box,
   Card,
   CardActions,
-  CardContent,
   Collapse,
   Button,
-  Typography,
-  Rating,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import Header from "components/Header";
-import { useGetProductsQuery } from "state/api";
+//import { useGetProductsQuery } from "state/api";
 
-const Product = ({
+const Stock = ({
   _id,
-  name,
-  description,
-  price,
-  rating,
-  category,
-  supply,
-  stat,
+  symbol,
+  company,
+  currPrice,
+  priceChange
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  return (
+  return ( //REM is more consistent over browsers vs px
     <Card
       sx={{
         backgroundImage: "none",
@@ -35,24 +29,7 @@ const Product = ({
         borderRadius: "0.55rem",
       }}
     >
-      <CardContent>
-        <Typography
-          sx={{ fontSize: 14 }}
-          color={theme.palette.secondary[700]}
-          gutterBottom
-        >
-          {category}
-        </Typography>
-        <Typography variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
-          ${Number(price).toFixed(2)}
-        </Typography>
-        <Rating value={rating} readOnly />
 
-        <Typography variant="body2">{description}</Typography>
-      </CardContent>
       <CardActions>
         <Button
           variant="primary"
@@ -70,23 +47,38 @@ const Product = ({
           color: theme.palette.neutral[300],
         }}
       >
-        <CardContent>
-          <Typography>id: {_id}</Typography>
-          <Typography>Supply Left: {supply}</Typography>
-          <Typography>
-            Yearly Sales This Year: {stat.yearlySalesTotal}
-          </Typography>
-          <Typography>
-            Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
-          </Typography>
-        </CardContent>
+
       </Collapse>
     </Card>
   );
 };
 
-const Products = () => {
-  const { data, isLoading } = useGetProductsQuery();
+function useGetStocksQuery(symbol) {
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+
+    fetch('https://localhost:5000/api/stock', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ //search stock table based on symbol
+        symbol: symbol
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data)
+      })
+      .catch(error => {
+        alert(error);
+      });
+
+  }
+};
+
+const Stocks = () => {
+  const { data, isLoading } = useGetStocksQuery();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
   return (
@@ -115,16 +107,16 @@ const Products = () => {
               supply,
               stat,
             }) => (
-              <Product
-                key={_id}
-                _id={_id}
-                name={name}
-                description={description}
-                price={price}
-                rating={rating}
-                category={category}
-                supply={supply}
-                stat={stat}
+              <Stock
+                // key={_id}
+                // _id={_id}
+                // name={name}
+                // description={description}
+                // price={price}
+                // rating={rating}
+                // category={category}
+                // supply={supply}
+                // stat={stat}
               />
             )
           )}
@@ -136,4 +128,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Stocks;
